@@ -12,3 +12,5 @@ https://github.com/litcoderr/DeepIsolation
 https://github.com/navidyou/Mask-RCNN-implementation-for-cell-nucleus-detection-executable-on-google-colab-
 https://github.com/vbosstech/machine-learning-by-examples
 https://github.com/KAIST-AILab/deeprl_practice_colab
+https://magenta.tensorflow.org/demos/colab/
+
