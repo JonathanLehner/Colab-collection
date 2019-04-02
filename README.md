@@ -14,3 +14,13 @@ https://github.com/vbosstech/machine-learning-by-examples
 https://github.com/KAIST-AILab/deeprl_practice_colab
 https://magenta.tensorflow.org/demos/colab/
 
+By ourselves:
+Mask RCNN:
+https://github.com/matterport/Mask_RCNN
+
+Mask RCNN Human Pose:
+https://github.com/callmevishu/MaskRCNN_HumanPose_Estimation
+
+Human Parsing:
+https://github.com/HCPLab-SYSU/ATEN
+
