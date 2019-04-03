@@ -24,3 +24,5 @@ https://github.com/callmevishu/MaskRCNN_HumanPose_Estimation
 Human Parsing:
 https://github.com/HCPLab-SYSU/ATEN
 
+Examples From Open CV book by Adrian Rosebrock:
+https://github.com/akshaychandra21/OpenCV_Basic_Exercises
