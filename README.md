@@ -23,9 +23,15 @@ Mask RCNN:  \
     - colab:  \
   Train shapes  \
     - colab:  \
-  Train shelf from via (http://www.robots.ox.ac.uk/~vgg/software/via/via-1.0.6.html)  \
+  Train GrabIGo shelf from via (http://www.robots.ox.ac.uk/~vgg/software/via/via-1.0.6.html)  \
     - colab:  \
-  Train shelf from COCO/with background subtraction \
+  Train GrabIGo shelf from COCO/with background subtraction \
+    - colab:  \
+  Visalize balloon \
+    - colab:  \
+  Visalize shapes \
+    - colab:  \
+  Count GrabIGo shelf from COCO/with background subtraction \
     - colab:  \
 
 Mask RCNN Human Pose: \
@@ -44,3 +50,5 @@ Hand pose estimation: \
   MANO - generating hand meshes \
   https://github.com/hassony2/manopth \
     - colab: https://colab.research.google.com/drive/1qdQrguWa0tYhtfgEo1G3-Mf7X7hvi8s8  \
+  3D Hand post estimation - Reimplementation of ~"3D hand pose estimation in the wild"
+  https://gitlab.inf.ethz.ch/OU-HILLIGES/wearable3dhandreconstruction/
