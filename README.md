@@ -1,3 +1,4 @@
+Sources:
 https://github.com/tugstugi/dl-colab-notebooks
 https://github.com/ContinualAI/colab
 https://research.google.com/seedbank/
@@ -13,16 +14,32 @@ https://github.com/navidyou/Mask-RCNN-implementation-for-cell-nucleus-detection-
 https://github.com/vbosstech/machine-learning-by-examples
 https://github.com/KAIST-AILab/deeprl_practice_colab
 https://magenta.tensorflow.org/demos/colab/
+https://github.com/JonathanLehner/ (ourselves)
 
-By ourselves:
 Mask RCNN:
-https://github.com/matterport/Mask_RCNN
+  https://github.com/matterport/Mask_RCNN
+  Train ballon
+    - colab:
+  Train shapes 
+    - colab:
+  Train shelf from via
+    - colab:
+  Train shelf from COCO/with background subtraction
+    - colab:
 
 Mask RCNN Human Pose:
-https://github.com/callmevishu/MaskRCNN_HumanPose_Estimation
+  https://github.com/callmevishu/MaskRCNN_HumanPose_Estimation
+    - colab:
 
 Human Parsing:
-https://github.com/HCPLab-SYSU/ATEN
+  https://github.com/HCPLab-SYSU/ATEN
+    - colab:
 
-Examples From Open CV book by Adrian Rosebrock:
-https://github.com/akshaychandra21/OpenCV_Basic_Exercises
+Open CV:
+  https://github.com/akshaychandra21/OpenCV_Basic_Exercises
+  Examples From Open CV book by Adrian Rosebrock
+
+Hand pose estimation:
+  MANO - generating hand meshes
+  https://github.com/hassony2/manopth
+    - colab: https://colab.research.google.com/drive/1qdQrguWa0tYhtfgEo1G3-Mf7X7hvi8s8
