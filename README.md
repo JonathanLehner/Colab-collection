@@ -15,6 +15,7 @@ https://github.com/vbosstech/machine-learning-by-examples \
 https://github.com/KAIST-AILab/deeprl_practice_colab  \
 https://magenta.tensorflow.org/demos/colab/ \
 https://github.com/JonathanLehner/ (ourselves)  \
+We just copy the most relevant repos from there.
 
 Mask RCNN:  \
   https://github.com/matterport/Mask_RCNN \
