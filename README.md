@@ -52,3 +52,5 @@ Hand pose estimation: \
 &nbsp;&nbsp;&nbsp;&nbsp;- colab: https://colab.research.google.com/drive/1qdQrguWa0tYhtfgEo1G3-Mf7X7hvi8s8  \
   3D Hand post estimation - Reimplementation of ~"3D hand pose estimation in the wild"
   https://gitlab.inf.ethz.ch/OU-HILLIGES/wearable3dhandreconstruction/
+&nbsp;&nbsp;&nbsp;&nbsp;- colab:  \
+
