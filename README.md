@@ -1,3 +1,9 @@
+Education/Tutorials: \
+  Pytorch - https://pytorch.org/tutorials/beginner/deep_learning_60min_blitz.html \
+  Open CV:  \
+&nbsp;&nbsp;&nbsp;&nbsp;https://github.com/akshaychandra21/OpenCV_Basic_Exercises \
+&nbsp;&nbsp;&nbsp;&nbsp;Examples From Open CV book by Adrian Rosebrock  \
+
 Sources:\
 https://github.com/tugstugi/dl-colab-notebooks  \
 https://github.com/ContinualAI/colab  \
@@ -42,9 +48,7 @@ Human Parsing:  \
   https://github.com/HCPLab-SYSU/ATEN \
 &nbsp;&nbsp;&nbsp;&nbsp;- colab:  \
 
-Open CV:  \
-  https://github.com/akshaychandra21/OpenCV_Basic_Exercises \
-  Examples From Open CV book by Adrian Rosebrock  \
+
 
 Hand pose estimation: \
   MANO - generating hand meshes \
