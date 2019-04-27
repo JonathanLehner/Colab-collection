@@ -1,3 +1,5 @@
+Note that local runtimes can be used as well (https://research.google.com/colaboratory/local-runtimes.html)
+
 Education/Tutorials: \
   Pytorch - https://pytorch.org/tutorials/beginner/deep_learning_60min_blitz.html \
   Open CV:  \
