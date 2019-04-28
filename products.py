@@ -1,6 +1,8 @@
 """
 Mask R-CNN
 Train on our small products dataset and implement color splash effect.
+with help of https://stackoverflow.com/questions/50804124/mask-rcnn-how-to-modify-load-mask-code-in-balloon-example-for-2-classes
+and https://github.com/matterport/Mask_RCNN/issues/372
 
 Adapted from the Mask R-CNN balloon example.
 Copyright (c) 2018 Matterport, Inc.
@@ -140,7 +142,8 @@ class BalloonDataset(utils.Dataset):
                 image_id=a['filename'],  # use file name as a unique image id
                 path=image_path,
                 width=width, height=height,
-                polygons=polygons)
+                polygons=polygons,
+                class_ids=class_ids)
 
     def load_mask(self, image_id):
         """Generate instance masks for an image.
