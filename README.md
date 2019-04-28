@@ -5,7 +5,10 @@ Education/Tutorials: \
   Open CV:  \
 &nbsp;&nbsp;&nbsp;&nbsp;https://github.com/akshaychandra21/OpenCV_Basic_Exercises \
 &nbsp;&nbsp;&nbsp;&nbsp;Examples From Open CV book by Adrian Rosebrock  \
-
+  Introduction to Machine Learning ETH - https://las.inf.ethz.ch/teaching/introml-s19 \
+&nbsp;&nbsp;&nbsp;&nbsp;colab: \
+  
+  
 Sources:\
 https://github.com/tugstugi/dl-colab-notebooks  \
 https://github.com/ContinualAI/colab  \
