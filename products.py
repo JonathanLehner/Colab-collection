@@ -1,6 +1,6 @@
 """
 Mask R-CNN
-Train on our toy products dataset and implement color splash effect.
+Train on our small products dataset and implement color splash effect.
 
 Adapted from the Mask R-CNN balloon example.
 Copyright (c) 2018 Matterport, Inc.
@@ -60,7 +60,7 @@ class BalloonConfig(Config):
     Derives from the base Config class and overrides some values.
     """
     # Give the configuration a recognizable name
-    NAME = "balloon"
+    NAME = "products"
 
     # We use a GPU with 12GB memory, which can fit two images.
     # Adjust down if you use a smaller GPU.
