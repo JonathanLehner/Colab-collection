@@ -1,8 +1,12 @@
 """
 Mask R-CNN
 Train on our small products dataset and implement color splash effect.
+Run it with the google colab notebook at
+https://colab.research.google.com/drive/1mKmyw0RLRuwGhubTt_UMEpEuOSMZySSz?authuser=1#scrollTo=jRYJvBj6_YTs
+
 with help of https://stackoverflow.com/questions/50804124/mask-rcnn-how-to-modify-load-mask-code-in-balloon-example-for-2-classes
 and https://github.com/matterport/Mask_RCNN/issues/372
+
 
 Adapted from the Mask R-CNN balloon example.
 Copyright (c) 2018 Matterport, Inc.
