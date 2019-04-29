@@ -176,15 +176,14 @@ class ProductDataset(utils.Dataset):
         class_ids: a 1D array of class IDs of the instance masks.
         """
         # If not a balloon dataset image, delegate to parent class.
-        image_info = self.image_info[image_id]
-        if image_info["source"] != "products":
+        info = self.image_info[image_id]
+        if info["source"] != "products":
             return super(self.__class__, self).load_mask(image_id)
         # get the class ids of objects in the image from annotation data
         class_ids = info['class_ids']
 
         # Convert polygons to a bitmap mask of shape
         # [height, width, instance_count]
-        info = self.image_info[image_id]
         mask = np.zeros([info["height"], info["width"], len(info["polygons"])],
                         dtype=np.uint8)
         for i, p in enumerate(info["polygons"]):
