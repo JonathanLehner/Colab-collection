@@ -146,9 +146,9 @@ class ProductDataset(utils.Dataset):
             # shape_attributes (see json format above)
             # The if condition is needed to support VIA versions 1.x and 2.x.
             if type(a['regions']) is dict:
-                polygons = [r['shape_attributes'] for r in a['regions'].values()]
+                boundaries = [r['shape_attributes'] for r in a['regions'].values()]
             else:
-                polygons = [r['shape_attributes'] for r in a['regions']] 
+                boundaries = [r['shape_attributes'] for r in a['regions']] 
 
             objects = [s['region_attributes'] for s in a['regions'].values()] #this is always {} for us
             product_type = os.path.basename(dataset_path) #products in one image are always of the same type
@@ -165,7 +165,7 @@ class ProductDataset(utils.Dataset):
                 image_id=a['filename'],  # use file name as a unique image id
                 path=image_path,
                 width=width, height=height,
-                polygons=polygons,
+                boundaries=boundariess,
                 class_ids=class_ids)
 
     def load_mask(self, image_id):
@@ -184,12 +184,19 @@ class ProductDataset(utils.Dataset):
 
         # Convert polygons to a bitmap mask of shape
         # [height, width, instance_count]
-        mask = np.zeros([info["height"], info["width"], len(info["polygons"])],
+        mask = np.zeros([info["height"], info["width"], len(info["boundaries"])],
                         dtype=np.uint8)
-        for i, p in enumerate(info["polygons"]):
-            # Get indexes of pixels inside the polygon and set them to 1
-            rr, cc = skimage.draw.polygon(p['all_points_y'], p['all_points_x'])
-            mask[rr, cc, i] = 1
+        for i, p in enumerate(info["boundaries"]):
+            # check if accidentally a circle was labeled
+            if(p["name"] == "circle"):
+                x = p["cx"]
+                y = p["cy"]
+                radius = p["r"]
+                rr, cc = skimage.draw.circle(x,y,radius)
+            else if(p["name"] == "polygon"):
+                # Get indexes of pixels inside the polygon and set them to 1
+                rr, cc = skimage.draw.polygon(p['all_points_y'], p['all_points_x'])
+                mask[rr, cc, i] = 1
 
         # Return mask, and array of class IDs of each instance. Since we have
         # one class ID only, we return an array of 1s
@@ -198,7 +205,7 @@ class ProductDataset(utils.Dataset):
     def image_reference(self, image_id):
         """Return the path of the image."""
         info = self.image_info[image_id]
-        if info["source"] == "balloon":
+        if info["source"] == "products":
             return info["path"]
         else:
             super(self.__class__, self).image_reference(image_id)
