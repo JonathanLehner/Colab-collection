@@ -150,7 +150,6 @@ class ProductDataset(utils.Dataset):
                 polygons = [r['shape_attributes'] for r in a['regions']] 
 
             objects = [s['region_attributes'] for s in a['regions'].values()] #this is always {} for us
-            import os
             product_type = os.path.basename(dataset_dir) #products in one image are always of the same type
             class_ids = [class_list[product_type] for n in objects]
             # load_mask() needs the image size to convert polygons to masks.
