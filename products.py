@@ -193,7 +193,7 @@ class ProductDataset(utils.Dataset):
                 y = p["cy"]
                 radius = p["r"]
                 rr, cc = skimage.draw.circle(x,y,radius)
-            else if(p["name"] == "polygon"):
+            elif(p["name"] == "polygon"):
                 # Get indexes of pixels inside the polygon and set them to 1
                 rr, cc = skimage.draw.polygon(p['all_points_y'], p['all_points_x'])
                 mask[rr, cc, i] = 1
