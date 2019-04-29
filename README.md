@@ -7,6 +7,8 @@ Education/Tutorials: \
 &nbsp;&nbsp;&nbsp;&nbsp;Examples From Open CV book by Adrian Rosebrock  \
   Introduction to Machine Learning ETH - https://las.inf.ethz.ch/teaching/introml-s19 \
 &nbsp;&nbsp;&nbsp;&nbsp;colab: \
+Python Datascience https://github.com/jakevdp/PythonDataScienceHandbook \
+- colabs listed on Github \
   
   
 Sources:\
