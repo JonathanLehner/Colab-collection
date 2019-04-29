@@ -112,6 +112,7 @@ class ProductDataset(utils.Dataset):
             self.add_class("products", class_list[class_name], class_name)
 
         # Train or validation dataset?
+        dataset_path = dataset_dir #save the path to get the product type below
         assert subset in ["train", "val"]
         dataset_dir = os.path.join(dataset_dir, subset)
 
@@ -150,7 +151,7 @@ class ProductDataset(utils.Dataset):
                 polygons = [r['shape_attributes'] for r in a['regions']] 
 
             objects = [s['region_attributes'] for s in a['regions'].values()] #this is always {} for us
-            product_type = os.path.basename(dataset_dir) #products in one image are always of the same type
+            product_type = os.path.basename(dataset_path) #products in one image are always of the same type
             class_ids = [class_list[product_type] for n in objects]
             # load_mask() needs the image size to convert polygons to masks.
             # Unfortunately, VIA doesn't include it in JSON, so we must read
