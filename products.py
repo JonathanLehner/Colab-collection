@@ -61,10 +61,13 @@ DEFAULT_LOGS_DIR = os.path.join(ROOT_DIR, "logs")
 ############################################################
 
 
-class BalloonConfig(Config):
-    """Configuration for training on the toy  dataset.
+class ProductConfig(Config):
+    """Configuration for training on the toy dataset.
     Derives from the base Config class and overrides some values.
     """
+    # the products are at the moment 
+    # apple, banana, feldschloesschen, huerlimann, ramen, redbull, tuc, tuna
+    
     # Give the configuration a recognizable name
     NAME = "products"
 
@@ -73,7 +76,7 @@ class BalloonConfig(Config):
     IMAGES_PER_GPU = 2
 
     # Number of classes (including background)
-    NUM_CLASSES = 1 + 1  # Background + balloon
+    NUM_CLASSES = 1 + 8  # Background + (apple, banana, feldschloesschen, huerlimann, ramen, redbull, tuc, tuna)
 
     # Number of training steps per epoch
     STEPS_PER_EPOCH = 100
@@ -86,15 +89,27 @@ class BalloonConfig(Config):
 #  Dataset
 ############################################################
 
-class BalloonDataset(utils.Dataset):
+class_list = {
+    "apple": 1,
+    "banana": 2,
+    "feldschloesschen": 3,
+    "huerlimann": 4,
+    "ramen": 5,
+    "redbull": 6,
+    "tuc": 7,
+    "tuna": 8
+}
 
-    def load_balloon(self, dataset_dir, subset):
-        """Load a subset of the Balloon dataset.
+class ProductDataset(utils.Dataset):
+
+    def load_product(self, dataset_dir, subset):
+        """Load a subset of the Product dataset.
         dataset_dir: Root directory of the dataset.
         subset: Subset to load: train or val
         """
-        # Add classes. We have only one class to add.
-        self.add_class("balloon", 1, "balloon")
+        # Add classes from class_list defined above
+        for class_name in class_list:
+            self.add_class("products", class_list[class_name], class_name)
 
         # Train or validation dataset?
         assert subset in ["train", "val"]
@@ -134,6 +149,10 @@ class BalloonDataset(utils.Dataset):
             else:
                 polygons = [r['shape_attributes'] for r in a['regions']] 
 
+            objects = [s['region_attributes'] for s in a['regions'].values()] #this is always {} for us
+            import os
+            product_type = os.path.basename(dataset_dir) #products in one image are always of the same type
+            class_ids = [class_list[product_type] for n in objects]
             # load_mask() needs the image size to convert polygons to masks.
             # Unfortunately, VIA doesn't include it in JSON, so we must read
             # the image. This is only managable since the dataset is tiny.
@@ -142,7 +161,7 @@ class BalloonDataset(utils.Dataset):
             height, width = image.shape[:2]
 
             self.add_image(
-                "balloon",
+                "products",
                 image_id=a['filename'],  # use file name as a unique image id
                 path=image_path,
                 width=width, height=height,
@@ -158,8 +177,10 @@ class BalloonDataset(utils.Dataset):
         """
         # If not a balloon dataset image, delegate to parent class.
         image_info = self.image_info[image_id]
-        if image_info["source"] != "balloon":
+        if image_info["source"] != "products":
             return super(self.__class__, self).load_mask(image_id)
+        # get the class ids of objects in the image from annotation data
+        class_ids = info['class_ids']
 
         # Convert polygons to a bitmap mask of shape
         # [height, width, instance_count]
@@ -173,7 +194,7 @@ class BalloonDataset(utils.Dataset):
 
         # Return mask, and array of class IDs of each instance. Since we have
         # one class ID only, we return an array of 1s
-        return mask.astype(np.bool), np.ones([mask.shape[-1]], dtype=np.int32)
+        return mask.astype(np.bool), np.array(class_ids, dtype=np.int32)
 
     def image_reference(self, image_id):
         """Return the path of the image."""
@@ -187,13 +208,15 @@ class BalloonDataset(utils.Dataset):
 def train(model):
     """Train the model."""
     # Training dataset.
-    dataset_train = BalloonDataset()
-    dataset_train.load_balloon(args.dataset, "train")
+    dataset_train = ProductDataset()
+    for class_name in class_list:
+        dataset_train.load_product(args.dataset+"/"+class_name, "train")
     dataset_train.prepare()
 
     # Validation dataset
-    dataset_val = BalloonDataset()
-    dataset_val.load_balloon(args.dataset, "val")
+    dataset_val = ProductDataset()
+    for class_name in class_list:
+        dataset_val.load_product(args.dataset+"/"+class_name, "val")
     dataset_val.prepare()
 
     # *** This training schedule is an example. Update to your needs ***
@@ -323,9 +346,9 @@ if __name__ == '__main__':
 
     # Configurations
     if args.command == "train":
-        config = BalloonConfig()
+        config = ProductConfig()
     else:
-        class InferenceConfig(BalloonConfig):
+        class InferenceConfig(ProductConfig):
             # Set batch size to 1 since we'll be running inference on
             # one image at a time. Batch size = GPU_COUNT * IMAGES_PER_GPU
             GPU_COUNT = 1
