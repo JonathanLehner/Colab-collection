@@ -326,7 +326,9 @@ if __name__ == '__main__':
                         help='Directory of the Products dataset')
     parser.add_argument('--epochs', required=False,
                         metavar="number of epochs",
-                        help='number of epochs')
+                        help='number of epochs',
+                        const=30, 
+                        type=int)
     parser.add_argument('--weights', required=True,
                         metavar="/path/to/weights.h5",
                         help="Path to weights .h5 file or 'coco'")
