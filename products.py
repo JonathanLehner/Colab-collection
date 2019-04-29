@@ -327,6 +327,7 @@ if __name__ == '__main__':
     parser.add_argument('--epochs', required=False,
                         metavar="number of epochs",
                         help='number of epochs',
+                        nargs='?',
                         const=30, 
                         type=int)
     parser.add_argument('--weights', required=True,
