@@ -165,7 +165,7 @@ class ProductDataset(utils.Dataset):
                 image_id=a['filename'],  # use file name as a unique image id
                 path=image_path,
                 width=width, height=height,
-                boundaries=boundariess,
+                boundaries=boundaries,
                 class_ids=class_ids)
 
     def load_mask(self, image_id):
