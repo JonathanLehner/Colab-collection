@@ -211,7 +211,7 @@ class ProductDataset(utils.Dataset):
             super(self.__class__, self).image_reference(image_id)
 
 
-def train(model):
+def train(model,epochs=30):
     """Train the model."""
     # Training dataset.
     dataset_train = ProductDataset()
@@ -232,7 +232,7 @@ def train(model):
     print("Training network heads")
     model.train(dataset_train, dataset_val,
                 learning_rate=config.LEARNING_RATE,
-                epochs=30,
+                epochs=epochs,
                 layers='heads')
 
 
@@ -323,7 +323,10 @@ if __name__ == '__main__':
                         help="'train' or 'splash'")
     parser.add_argument('--dataset', required=False,
                         metavar="/path/to/balloon/dataset/",
-                        help='Directory of the Balloon dataset')
+                        help='Directory of the Products dataset')
+    parser.add_argument('--epochs', required=False,
+                        metavar="number of epochs",
+                        help='number of epochs')
     parser.add_argument('--weights', required=True,
                         metavar="/path/to/weights.h5",
                         help="Path to weights .h5 file or 'coco'")
@@ -398,7 +401,7 @@ if __name__ == '__main__':
 
     # Train or evaluate
     if args.command == "train":
-        train(model)
+        train(model,epochs)
     elif args.command == "splash":
         detect_and_color_splash(model, image_path=args.image,
                                 video_path=args.video)
