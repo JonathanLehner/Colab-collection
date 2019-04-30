@@ -135,10 +135,14 @@ class ProductDataset(utils.Dataset):
         annotations = json.load(open(os.path.join(dataset_dir, "via_region_data.json")))
         annotations = list(annotations.values())  # don't need the dict keys
 
-        # The VIA tool saves images in the JSON even if they don't have any
-        # annotations. Skip unannotated images.
-        annotations = [a for a in annotations if a['regions']]
-
+        product_type = os.path.basename(dataset_path) #products in one image are always of the same type
+        if(product_type == "test_do_not_label"): # hack to allow loading of an unlabeled dataset
+            product_type = "apple"
+        else:
+            # The VIA tool saves images in the JSON even if they don't have any
+            # annotations. Skip unannotated images.
+            annotations = [a for a in annotations if a['regions']]     
+       
         # Add images
         for a in annotations:
             # Get the x, y coordinaets of points of the polygons that make up
@@ -150,10 +154,7 @@ class ProductDataset(utils.Dataset):
             else:
                 boundaries = [r['shape_attributes'] for r in a['regions']] 
 
-            objects = [s['region_attributes'] for s in a['regions'].values()] #this is always {} for us
-            product_type = os.path.basename(dataset_path) #products in one image are always of the same type
-            if(product_type == "test_do_not_label"): # hack to allow loading of an unlabeled dataset
-                product_type = "apple"       
+            objects = [s['region_attributes'] for s in a['regions'].values()] #this is always {} for us       
             class_ids = [class_list[product_type] for n in objects]
             # load_mask() needs the image size to convert polygons to masks.
             # Unfortunately, VIA doesn't include it in JSON, so we must read
