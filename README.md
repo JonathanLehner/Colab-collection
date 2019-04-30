@@ -9,6 +9,8 @@ Education/Tutorials: \
 &nbsp;&nbsp;&nbsp;&nbsp;colab: \
 Python Datascience https://github.com/jakevdp/PythonDataScienceHandbook \
 - colabs listed on Github \
+PyRender \
+  - offscreen rendering colabs: https://pyrender.readthedocs.io/en/latest/examples/offscreen.html \
   
   
 Sources:\
