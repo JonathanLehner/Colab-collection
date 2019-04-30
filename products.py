@@ -137,11 +137,22 @@ class ProductDataset(utils.Dataset):
 
         product_type = os.path.basename(dataset_path) #products in one image are always of the same type
         if(product_type == "test_do_not_label"): # hack to allow loading of an unlabeled dataset
-            product_type = "apple"
-        else:
-            # The VIA tool saves images in the JSON even if they don't have any
-            # annotations. Skip unannotated images.
-            annotations = [a for a in annotations if a['regions']]     
+            for a in annotations:
+                image_path = os.path.join(dataset_dir, a['filename'])
+                image = skimage.io.imread(image_path)
+                height, width = image.shape[:2]
+                self.add_image(
+                    "products",
+                    image_id=a['filename'],  # use file name as a unique image id
+                    path=image_path,
+                    width=width, height=height,
+                    boundaries=[],
+                    class_ids=[])
+            return            
+                     
+        # The VIA tool saves images in the JSON even if they don't have any
+        # annotations. Skip unannotated images.
+        annotations = [a for a in annotations if a['regions']]     
        
         # Add images
         for a in annotations:
