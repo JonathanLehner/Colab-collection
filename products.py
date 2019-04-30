@@ -102,7 +102,7 @@ class_list = {
 
 class ProductDataset(utils.Dataset):
 
-    def load_product(self, dataset_dir, subset):
+    def load_products(self, dataset_dir, subset):
         """Load a subset of the Product dataset.
         dataset_dir: Root directory of the dataset.
         subset: Subset to load: train or val
@@ -152,6 +152,8 @@ class ProductDataset(utils.Dataset):
 
             objects = [s['region_attributes'] for s in a['regions'].values()] #this is always {} for us
             product_type = os.path.basename(dataset_path) #products in one image are always of the same type
+            if(product_type == "test_do_not_label"): # hack to allow loading of an unlabeled dataset
+                product_type = "apple"       
             class_ids = [class_list[product_type] for n in objects]
             # load_mask() needs the image size to convert polygons to masks.
             # Unfortunately, VIA doesn't include it in JSON, so we must read
@@ -216,13 +218,13 @@ def train(model,epochs=30):
     # Training dataset.
     dataset_train = ProductDataset()
     for class_name in class_list:
-        dataset_train.load_product(args.dataset+"/"+class_name, "train")
+        dataset_train.load_products(args.dataset+"/"+class_name, "train")
     dataset_train.prepare()
 
     # Validation dataset
     dataset_val = ProductDataset()
     for class_name in class_list:
-        dataset_val.load_product(args.dataset+"/"+class_name, "val")
+        dataset_val.load_products(args.dataset+"/"+class_name, "val")
     dataset_val.prepare()
 
     # *** This training schedule is an example. Update to your needs ***
