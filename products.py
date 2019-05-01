@@ -222,11 +222,14 @@ class ProductDataset(utils.Dataset):
                 rr, cc = skimage.draw.polygon(p['all_points_y'], p['all_points_x'])
                 mask[rr, cc, i] = 1
 
-        filename = info["filename"]
+        # save mask to file // should only be with VIA so mask file does not yet exists
+        filename = info["path"]
         print(filename)
-        mask_filename = filename + "_mask"
+        mask_filename = os.path.splitext(filename)[0] + "_mask.jpg"
         print(mask_filename)
+        image_path = os.path.join(dataset_dir, mask_filename)
         skimage.io.imsave(image_path, mask.astype(np.bool))
+
         # image_id == filename
         mask_filename = filename + "_mask"
         image_path = os.path.join(dataset_dir, mask_filename)
