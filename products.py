@@ -186,6 +186,28 @@ class ProductDataset(utils.Dataset):
 
             # augment data
             # create mask
+            # Convert polygons to a bitmap mask of shape
+            # [height, width, instance_count]
+            mask = np.zeros([info["height"], info["width"], len(boundaries)],
+                            dtype=np.uint8)
+            for i, p in enumerate(boundaries):
+                # check if accidentally a circle was labeled
+                if(p["name"] == "circle"):
+                    x = p["cx"]
+                    y = p["cy"]
+                    radius = p["r"]
+                    rr, cc = skimage.draw.circle(x,y,radius)
+                elif(p["name"] == "polygon"):
+                    # Get indexes of pixels inside the polygon and set them to 1
+                    rr, cc = skimage.draw.polygon(p['all_points_y'], p['all_points_x'])
+                    mask[rr, cc, i] = 1
+
+            filename = image_path
+            print(filename)
+            mask_filename = os.path.splitext(filename)[0] + "_mask.jpg"
+            print(mask_filename)
+            print(mask)
+            skimage.io.imsave(mask_filename, mask)
             # modifications with https://github.com/aleju/imgaug
             # Fliplr
             # Flipud
@@ -224,12 +246,12 @@ class ProductDataset(utils.Dataset):
                 mask[rr, cc, i] = 1
 
         # save mask to file // should only be with VIA so mask file does not yet exists
-        filename = info["path"]
-        print(filename)
-        mask_filename = os.path.splitext(filename)[0] + "_mask.jpg"
-        print(mask_filename)
-        print(mask)
-        skimage.io.imsave(mask_filename, mask)
+        #filename = info["path"]
+        #print(filename)
+        #mask_filename = os.path.splitext(filename)[0] + "_mask.jpg"
+        #print(mask_filename)
+        #print(mask)
+        #skimage.io.imsave(mask_filename, mask)
 
         # image_id == filename
         #mask_filename = filename + "_mask"
