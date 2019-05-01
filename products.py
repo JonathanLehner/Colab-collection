@@ -220,12 +220,13 @@ class ProductDataset(utils.Dataset):
                 rr, cc = skimage.draw.polygon(p['all_points_y'], p['all_points_x'])
                 mask[rr, cc, i] = 1
 
-        print(image_id)
-        mask_filename = image_id + "_mask"
+        filename = info["image_id"]
+        print(filename)
+        mask_filename = filename + "_mask"
         print(mask_filename)
         skimage.io.imsave(image_path, mask.astype(np.bool))
         # image_id == filename
-        mask_filename = image_id + "_mask"
+        mask_filename = filename + "_mask"
         image_path = os.path.join(dataset_dir, mask_filename)
         mask = skimage.io.imread(image_path)
         # Return mask, and array of class IDs of each instance. Since we have
