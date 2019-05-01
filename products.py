@@ -227,7 +227,8 @@ class ProductDataset(utils.Dataset):
         print(filename)
         mask_filename = os.path.splitext(filename)[0] + "_mask.jpg"
         print(mask_filename)
-        skimage.io.imsave(mask_filename, mask.astype(np.bool))
+        print(mask)
+        skimage.io.imsave(mask_filename, mask)
 
         # image_id == filename
         #mask_filename = filename + "_mask"
