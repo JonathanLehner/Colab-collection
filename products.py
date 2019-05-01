@@ -144,6 +144,7 @@ class ProductDataset(utils.Dataset):
                 self.add_image(
                     "products",
                     image_id=a['filename'],  # use file name as a unique image id
+                    filename=a['filename'],
                     path=image_path,
                     width=width, height=height,
                     boundaries=[])
@@ -176,6 +177,7 @@ class ProductDataset(utils.Dataset):
             self.add_image(
                 "products",
                 image_id=a['filename'],  # use file name as a unique image id
+                filename = a['filename'],
                 path=image_path,
                 width=width, height=height,
                 boundaries=boundaries,
@@ -220,7 +222,7 @@ class ProductDataset(utils.Dataset):
                 rr, cc = skimage.draw.polygon(p['all_points_y'], p['all_points_x'])
                 mask[rr, cc, i] = 1
 
-        filename = info["image_id"]
+        filename = info["filename"]
         print(filename)
         mask_filename = filename + "_mask"
         print(mask_filename)
