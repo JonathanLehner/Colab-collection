@@ -146,14 +146,13 @@ class ProductDataset(utils.Dataset):
                     image_id=a['filename'],  # use file name as a unique image id
                     path=image_path,
                     width=width, height=height,
-                    boundaries=[],
-                    class_ids=[])
+                    boundaries=[])
             return            
                      
         # The VIA tool saves images in the JSON even if they don't have any
         # annotations. Skip unannotated images.
         annotations = [a for a in annotations if a['regions']]     
-       
+
         # Add images
         for a in annotations:
             # Get the x, y coordinaets of points of the polygons that make up
@@ -171,7 +170,7 @@ class ProductDataset(utils.Dataset):
             # Unfortunately, VIA doesn't include it in JSON, so we must read
             # the image. This is only managable since the dataset is tiny.
             image_path = os.path.join(dataset_dir, a['filename'])
-            image = skimage.io.imread(image_path)
+            image = skimage.io.imread(image_path)                                                                                                                                                                                                                                                                           
             height, width = image.shape[:2]
 
             self.add_image(
@@ -182,9 +181,18 @@ class ProductDataset(utils.Dataset):
                 boundaries=boundaries,
                 class_ids=class_ids)
 
+            # augment data
+            # create mask
+            # modifications with https://github.com/aleju/imgaug
+            # Fliplr
+            # Flipud
+            # Rot90
+            # GaussianBlur
+            # SaltAndPepper
+        
     def load_mask(self, image_id):
         """Generate instance masks for an image.
-       Returns:
+        Returns:
         masks: A bool array of shape [height, width, instance count] with
             one mask per instance.
         class_ids: a 1D array of class IDs of the instance masks.
@@ -212,6 +220,12 @@ class ProductDataset(utils.Dataset):
                 rr, cc = skimage.draw.polygon(p['all_points_y'], p['all_points_x'])
                 mask[rr, cc, i] = 1
 
+        mask_filename = image_id + "_mask"
+        skimage.io.imread(image_path, mask.astype(np.bool))
+        # image_id == filename
+        mask_filename = image_id + "_mask"
+        image_path = os.path.join(dataset_dir, mask_filename)
+        mask = skimage.io.imread(image_path)
         # Return mask, and array of class IDs of each instance. Since we have
         # one class ID only, we return an array of 1s
         return mask.astype(np.bool), np.array(class_ids, dtype=np.int32)
