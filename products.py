@@ -147,7 +147,8 @@ class ProductDataset(utils.Dataset):
                     filename=a['filename'],
                     path=image_path,
                     width=width, height=height,
-                    boundaries=[])
+                    boundaries=[],
+                    class_ids=[])
             return            
                      
         # The VIA tool saves images in the JSON even if they don't have any
