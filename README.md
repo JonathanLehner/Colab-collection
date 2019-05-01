@@ -12,16 +12,16 @@ Python Datascience https://github.com/jakevdp/PythonDataScienceHandbook \
 PyRender \
   - offscreen rendering colabs: https://pyrender.readthedocs.io/en/latest/examples/offscreen.html \
   
-  
-Sources:\
+Collections:
+https://github.com/zszazi/awesome-collection-of-google-colab-notebooks \
 https://github.com/tugstugi/dl-colab-notebooks  \
+https://github.com/theamrzaki/text_summurization_abstractive_methods \
+https://github.com/paulgureghian/PyTorch_Projects \
+
+Sources:\
 https://github.com/ContinualAI/colab  \
 https://research.google.com/seedbank/ \
-https://github.com/zszazi/awesome-collection-of-google-colab-notebooks  \
 https://github.com/RomRoc/objdet_train_tensorflow_colab \
-https://github.com/pavisj/YoloV3_video_colab  \
-https://github.com/ivangrov/YOLOv3-GoogleColab  \
-https://github.com/paulgureghian/PyTorch_Projects \
 https://github.com/cesare-montresor/fastai-colab  \
 https://github.com/ajit2704/Reinforcement-Learning-on-google-colab  \
 https://github.com/litcoderr/DeepIsolation  \
@@ -57,6 +57,9 @@ Human Parsing:  \
   https://github.com/HCPLab-SYSU/ATEN \
 &nbsp;&nbsp;&nbsp;&nbsp;- colab:  \
 
+Yolo: \
+https://github.com/pavisj/YoloV3_video_colab \
+https://github.com/ivangrov/YOLOv3-GoogleColab  \
 
 
 Hand pose estimation: \
