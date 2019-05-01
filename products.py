@@ -220,7 +220,9 @@ class ProductDataset(utils.Dataset):
                 rr, cc = skimage.draw.polygon(p['all_points_y'], p['all_points_x'])
                 mask[rr, cc, i] = 1
 
+        print(image_id)
         mask_filename = image_id + "_mask"
+        print(mask_filename)
         skimage.io.imsave(image_path, mask.astype(np.bool))
         # image_id == filename
         mask_filename = image_id + "_mask"
