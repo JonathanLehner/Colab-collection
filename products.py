@@ -206,7 +206,7 @@ class ProductDataset(utils.Dataset):
             mask_filename = os.path.splitext(filename)[0] + "_mask.jpg"
             print(mask_filename)
             print(mask)
-            skimage.io.imsave(mask_filename, mask)
+            skimage.io.imsave(mask_filename, skimage.img_as_uint(mask))
             # modifications with https://github.com/aleju/imgaug
             # Fliplr
             # Flipud
