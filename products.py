@@ -40,6 +40,8 @@ import json
 import datetime
 import numpy as np
 import skimage.draw
+import imgaug  # https://github.com/aleju/imgaug (pip3 install imgaug)s
+from imgaug import augmenters as iaa 
 
 # Root directory of the project
 ROOT_DIR = os.path.abspath("../../")
@@ -184,35 +186,6 @@ class ProductDataset(utils.Dataset):
                 boundaries=boundaries,
                 class_ids=class_ids)
 
-            # augment data
-            # create mask
-            # Convert polygons to a bitmap mask of shape
-            # [height, width, instance_count]
-            mask = np.zeros([height, width, len(boundaries)], dtype=np.uint8)
-            for i, p in enumerate(boundaries):
-                # check if accidentally a circle was labeled
-                if(p["name"] == "circle"):
-                    x = p["cx"]
-                    y = p["cy"]
-                    radius = p["r"]
-                    rr, cc = skimage.draw.circle(x,y,radius)
-                elif(p["name"] == "polygon"):
-                    # Get indexes of pixels inside the polygon and set them to 1
-                    rr, cc = skimage.draw.polygon(p['all_points_y'], p['all_points_x'])
-                    mask[rr, cc, i] = 1
-
-            filename = image_path
-            print(filename)
-            mask_filename = os.path.splitext(filename)[0] + "_mask.jpg"
-            print(mask_filename)
-            print(mask)
-            skimage.io.imsave(mask_filename, skimage.img_as_uint(mask))
-            # modifications with https://github.com/aleju/imgaug
-            # Fliplr
-            # Flipud
-            # Rot90
-            # GaussianBlur
-            # SaltAndPepper
         
     def load_mask(self, image_id):
         """Generate instance masks for an image.
@@ -244,18 +217,6 @@ class ProductDataset(utils.Dataset):
                 rr, cc = skimage.draw.polygon(p['all_points_y'], p['all_points_x'])
                 mask[rr, cc, i] = 1
 
-        # save mask to file // should only be with VIA so mask file does not yet exists
-        #filename = info["path"]
-        #print(filename)
-        #mask_filename = os.path.splitext(filename)[0] + "_mask.jpg"
-        #print(mask_filename)
-        #print(mask)
-        #skimage.io.imsave(mask_filename, mask)
-
-        # image_id == filename
-        #mask_filename = filename + "_mask"
-        #image_path = os.path.join(dataset_dir, mask_filename)
-        #mask = skimage.io.imread(image_path)
         # Return mask, and array of class IDs of each instance. Since we have
         # one class ID only, we return an array of 1s
         return mask.astype(np.bool), np.array(class_ids, dtype=np.int32)
@@ -287,11 +248,18 @@ def train(model,epochs=30):
     # Since we're using a very small dataset, and starting from
     # COCO trained weights, we don't need to train too long. Also,
     # no need to train all layers, just the heads should do it.
+    augmentation = iaa.Sequential([
+        iaa.Crop(px=(0, 16)), # crop images from each side by 0 to 16px (randomly chosen)
+        iaa.Fliplr(0.5), # horizontally flip 50% of the images
+        iaa.GaussianBlur(sigma=(0, 3.0)) # blur images with a sigma of 0 to 3.0
+        iaa.Flipud(0.2), # vertically flip 20% of all images
+    ])
     print("Training network heads")
     model.train(dataset_train, dataset_val,
                 learning_rate=config.LEARNING_RATE,
                 epochs=epochs,
-                layers='heads')
+                layers='heads',
+                augmentation=augmentation)
 
 
 def color_splash(image, mask):
