@@ -231,9 +231,9 @@ class ProductDataset(utils.Dataset):
         skimage.io.imsave(image_path, mask.astype(np.bool))
 
         # image_id == filename
-        mask_filename = filename + "_mask"
-        image_path = os.path.join(dataset_dir, mask_filename)
-        mask = skimage.io.imread(image_path)
+        #mask_filename = filename + "_mask"
+        #image_path = os.path.join(dataset_dir, mask_filename)
+        #mask = skimage.io.imread(image_path)
         # Return mask, and array of class IDs of each instance. Since we have
         # one class ID only, we return an array of 1s
         return mask.astype(np.bool), np.array(class_ids, dtype=np.int32)
