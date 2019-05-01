@@ -188,8 +188,7 @@ class ProductDataset(utils.Dataset):
             # create mask
             # Convert polygons to a bitmap mask of shape
             # [height, width, instance_count]
-            mask = np.zeros([info["height"], info["width"], len(boundaries)],
-                            dtype=np.uint8)
+            mask = np.zeros([height, width, len(boundaries)], dtype=np.uint8)
             for i, p in enumerate(boundaries):
                 # check if accidentally a circle was labeled
                 if(p["name"] == "circle"):
