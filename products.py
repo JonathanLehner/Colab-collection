@@ -248,12 +248,22 @@ def train(model,epochs=30):
     # Since we're using a very small dataset, and starting from
     # COCO trained weights, we don't need to train too long. Also,
     # no need to train all layers, just the heads should do it.
-    augmentation = iaa.SomeOf((0, None),[
-        iaa.Crop(px=(0, 16)), # crop images from each side by 0 to 16px (randomly chosen)
+    # https://imgaug.readthedocs.io/en/latest/source/examples_basics.html
+    augmentation = iaa.Sequential([ 
+        iaa.Crop(percent=(0, 0.1)), # crop images from each side by 0 to 16px (randomly chosen)
         iaa.Fliplr(0.5), # horizontally flip 50% of the images
-        iaa.GaussianBlur(sigma=(0, 3.0)), # blur images with a sigma of 0 to 3.0
-        iaa.Flipud(0.2), # vertically flip 20% of all images
-        iaa.AdditiveGaussianNoise(scale=0.2*255),
+        iaa.Flipud(0.5), # vertically flip 50% of all images
+        iaa.Sometimes(0.5,
+            iaa.GaussianBlur(sigma=(0, 0.5))
+        ),
+        iaa.AdditiveGaussianNoise(loc=0, scale=(0.0, 0.05*255), per_channel=0.5),
+        iaa.Multiply((0.8, 1.2), per_channel=0.2),
+        iaa.Affine(
+            scale={"x": (0.8, 1.2), "y": (0.8, 1.2)},
+            translate_percent={"x": (-0.2, 0.2), "y": (-0.2, 0.2)},
+            rotate=(-25, 25),
+            shear=(-8, 8)
+        )
     ], random_order=True)
     print("Training network heads")
     model.train(dataset_train, dataset_val,
