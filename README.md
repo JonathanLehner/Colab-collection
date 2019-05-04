@@ -53,9 +53,13 @@ Mask RCNN Human Pose: \
   https://github.com/callmevishu/MaskRCNN_HumanPose_Estimation  \
 &nbsp;&nbsp;&nbsp;&nbsp;- colab:  \
 
-Human Parsing:  \
+Human Parsing/Image segmentation:  \
   https://github.com/HCPLab-SYSU/ATEN \
-&nbsp;&nbsp;&nbsp;&nbsp;- colab:  \
+  https://github.com/Engineering-Course/CIHP_PGN \ 
+  https://github.com/Engineering-Course/LIP_SSL \
+  https://github.com/Engineering-Course/LIP_JPPNet \
+  https://github.com/bonlime/keras-deeplab-v3-plus \
+  https://github.com/Gaoyiminggithub/Graphonomy \
 
 Yolo: \
 https://github.com/pavisj/YoloV3_video_colab \
@@ -69,4 +73,5 @@ Hand pose estimation: \
   3D Hand post estimation - Reimplementation of ~"3D hand pose estimation in the wild"
   https://gitlab.inf.ethz.ch/OU-HILLIGES/wearable3dhandreconstruction/  \
 &nbsp;&nbsp;&nbsp;&nbsp;- colab:  \
+
 
