@@ -15,7 +15,7 @@ PyRender \
 Keras/Tensorflow:\
 - https://github.com/tensorflow/examples
 - Classification: https://github.com/tensorflow/examples/blob/master/community/en/flowers_tf_lite.ipynb
-- Object detection: https://drive.google.com/file/d/16QQtlCa4-p4zqxuhJ0U-vOAT5dU0txJV/view or https://github.com/JoeHsiao/tensorflow-object-detection-in-google-colab/blob/master/tensoflow-object-detection-setup.ipynb
+- Object detection: https://drive.google.com/file/d/16QQtlCa4-p4zqxuhJ0U-vOAT5dU0txJV/view 
 
 Collections:
 https://github.com/zszazi/awesome-collection-of-google-colab-notebooks \
