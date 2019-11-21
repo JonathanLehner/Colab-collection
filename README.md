@@ -12,6 +12,11 @@ Python Datascience https://github.com/jakevdp/PythonDataScienceHandbook \
 PyRender \
   - offscreen rendering colabs: https://pyrender.readthedocs.io/en/latest/examples/offscreen.html \
   
+Keras/Tensorflow:\
+- https://github.com/tensorflow/examples
+- Classification: https://github.com/tensorflow/examples/blob/master/community/en/flowers_tf_lite.ipynb
+- Object detection: https://drive.google.com/file/d/16QQtlCa4-p4zqxuhJ0U-vOAT5dU0txJV/view or https://github.com/JoeHsiao/tensorflow-object-detection-in-google-colab/blob/master/tensoflow-object-detection-setup.ipynb
+
 Collections:
 https://github.com/zszazi/awesome-collection-of-google-colab-notebooks \
 https://github.com/tugstugi/dl-colab-notebooks  \
@@ -73,5 +78,6 @@ Hand pose estimation: \
   3D Hand post estimation - Reimplementation of ~"3D hand pose estimation in the wild"
   https://gitlab.inf.ethz.ch/OU-HILLIGES/wearable3dhandreconstruction/  \
 &nbsp;&nbsp;&nbsp;&nbsp;- colab:  \
+
 
 
